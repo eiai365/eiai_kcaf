@@ -6,17 +6,10 @@ from eiai_kcaf.abc.app_config import ServiceConfig
 
 from eiai_kcaf.kcaf_symptoms import Symptoms
 
-
-class KcafBusEnum(enum.Enum):
-    KCAF_BUS = enum.auto()
-
-
 logger = logging.getLogger(f"kcaf.framework.{os.path.splitext(os.path.basename(__file__))[0]}")
 
 
 class KcafContext:
-    kcaf_bus: KcafBusEnum
-    bus: str
     symptoms: Symptoms
     kcaf_service_dict: dict
     user_defined_dict: dict
@@ -32,8 +25,6 @@ class KcafContext:
     def __new__(
         cls,
         *,
-        kcaf_bus: KcafBusEnum,
-        bus: str = "",
         symptoms: Symptoms = {},
         kcaf_service_dict: dict = {},
         user_defined_dict: dict = {},
@@ -47,8 +38,6 @@ class KcafContext:
         parameters: str = None,
     ):
         self = object.__new__(cls)
-        self.kcaf_bus = kcaf_bus
-        self.bus = bus
         self.symptoms = symptoms
         self.kcaf_service_dict = kcaf_service_dict
         self.user_defined_dict = user_defined_dict
@@ -67,16 +56,13 @@ class KcafContext:
         return (), self.__dict__
 
     @classmethod
-    def init_for_kcaf_bus(
+    def init_kcaf(
         cls,
-        bus: str,
         service_config: ServiceConfig,
         function: str,
         logging_level: str,
         output: str,
-        # service: ServiceEnum,
         service: str,
-        # cluster: ClusterEnum,
         cluster: str,
         parameters: str,
     ) -> "KcafContext":
@@ -85,8 +71,6 @@ class KcafContext:
         cluster = cluster
 
         return cls(
-            kcaf_bus=KcafBusEnum.KCAF_BUS,
-            bus=bus,
             kcaf_service_dict=service_config.return_kcaf_service_dict(),
             user_defined_dict=service_config.return_user_defined_dict(),
             function=function,

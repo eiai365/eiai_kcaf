@@ -34,19 +34,14 @@ class KcafCLI:
         self.processor_runner = processor_runner
 
     def run(self, args: Namespace):
-        if args.kcaf_bus == "kcaf_bus":
-            context = KcafContext.init_for_kcaf_bus(
-                bus=args.kcaf_bus,
-                service_config=self.service_config,
-                function=args.function,
-                logging_level=args.logging_level,
-                output=args.output,
-                cluster=args.environment.replace('-', '_'),
-                service=args.service,
-                parameters=args.parameters,
-                )
-            self.cluster_config.switch_cluster(context.cluster)
-            self.processor_runner.select_and_run_processor(context, self.kcaf_config)
-        else:
-            logger.error(f"EIAI only support kcaf_bus, nothing else.")
-            exit(110)
+        context = KcafContext.init_kcaf(
+            service_config=self.service_config,
+            function=args.function,
+            logging_level=args.logging_level,
+            output=args.output,
+            cluster=args.environment.replace('-', '_'),
+            service=args.service,
+            parameters=args.parameters,
+        )
+        self.cluster_config.switch_cluster(context.cluster)
+        self.processor_runner.select_and_run_processor(context, self.kcaf_config)
