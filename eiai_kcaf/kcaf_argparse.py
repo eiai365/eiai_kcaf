@@ -60,10 +60,6 @@ def add_arguments_logging_level(parser, logging_level_list):
 def parse(sys_args: list) -> argparse.Namespace:
     parser = argparse.ArgumentParser()
 
-    sp = parser.add_subparsers(required=True, dest="kcaf_bus")
-
-    kcaf_bus_parser = sp.add_parser("kcaf_bus")
-
     logging_level_choices = [
         "FATAL",
         "CRITICAL",
@@ -75,11 +71,11 @@ def parse(sys_args: list) -> argparse.Namespace:
 
     output_choices = ["local", "slack", ]
 
-    add_arguments_env(kcaf_bus_parser)
-    add_arguments_service(kcaf_bus_parser)
-    add_arguments_function(kcaf_bus_parser)
-    add_arguments_parameters(kcaf_bus_parser)
-    add_arguments_logging_level(kcaf_bus_parser, logging_level_list=logging_level_choices)
-    add_arguments_output(kcaf_bus_parser, output_list=output_choices)
+    add_arguments_env(parser)
+    add_arguments_service(parser)
+    add_arguments_function(parser)
+    add_arguments_parameters(parser)
+    add_arguments_logging_level(parser, logging_level_list=logging_level_choices)
+    add_arguments_output(parser, output_list=output_choices)
 
     return parser.parse_args(sys_args[1:])

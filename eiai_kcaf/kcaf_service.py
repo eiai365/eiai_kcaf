@@ -34,8 +34,7 @@ class KcafService:
         self.processor_runner = processor_runner
 
     def run(self, args: Namespace):
-        context = KcafContext.init_for_kcaf_bus(
-            bus=args.kcaf_bus,
+        context = KcafContext.init_kcaf(
             service_config=self.service_config,
             function=args.function,
             logging_level=args.logging_level,

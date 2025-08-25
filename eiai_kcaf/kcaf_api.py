@@ -31,7 +31,6 @@ class KcafAPI:
 
         parser = ArgumentParser()
 
-        parser.add_argument("kcaf_bus")
         parser.add_argument("function")
         parser.add_argument("service")
         parser.add_argument("environment")
@@ -39,7 +38,7 @@ class KcafAPI:
         parser.add_argument("logging_level")
         parser.add_argument("output")
 
-        args = parser.parse_args(["kcaf_bus", function, service, environment, parameters, logging_level, output])
+        args = parser.parse_args([function, service, environment, parameters, logging_level, output])
         kcaf_service.run(args)
 
         return ProcessorExitCode.EXIT_CODE_PROCESSOR_SUCCESS
