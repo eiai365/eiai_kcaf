@@ -19,7 +19,7 @@ class SensitiveDataFormatter(logging.Formatter):
 
 def build_logging(log_file, log_level):
     try:
-        format_str = "%(asctime)s - %(filename)s - %(module)s - %(funcName)s - line:%(lineno)d - %(process)d - %(levelname)s - %(message)s"
+        format_str = "%(asctime)s - %(filename)s - %(module)s - %(funcName)s - line:%(lineno)d - %(process)d - %(thread)d - %(levelname)s - %(message)s"
 
         # stream handler
         stream_handler = logging.StreamHandler(sys.stderr)
