@@ -76,12 +76,12 @@ class BaseProcessor:
                         f"\n\n")
 
             if context.output == 'slack':
-                if os.environ.get('KCAF_SLACK_TOKEN') is None or os.environ.get('KCAF_SLACK_TOKEN') == '':
-                    logger.error(f"Output to slack is not supported because Environment Variable KCAF_SLACK_TOKEN is not configured, slack output is ignored.")
+                if os.environ.get('EIAI_KCAF_SLACK_TOKEN') is None or os.environ.get('EIAI_KCAF_SLACK_TOKEN') == '':
+                    logger.error(f"Output to slack is not supported because Environment Variable EIAI_KCAF_SLACK_TOKEN is not configured, slack output is ignored.")
                     context.output = 'local'
                 else:
-                    if (os.environ.get('KCAF_DEFAULT_SLACK_CHANNEL') is None or os.environ.get('KCAF_DEFAULT_SLACK_CHANNEL') == '') and (os.environ.get('KCAF_SERVICE_CONFIG_LOCATION') is None or os.environ.get('KCAF_SERVICE_CONFIG_LOCATION') == ''):
-                        logger.error(f"Service is not configured with a slack channel, slack output is ignored. If you want slack output, please setup Environment Variable KCAF_DEFAULT_SLACK_CHANNEL or service config json file.")
+                    if (os.environ.get('EIAI_KCAF_DEFAULT_SLACK_CHANNEL') is None or os.environ.get('EIAI_KCAF_DEFAULT_SLACK_CHANNEL') == '') and (os.environ.get('EIAI_KCAF_SERVICE_CONFIG_LOCATION') is None or os.environ.get('EIAI_KCAF_SERVICE_CONFIG_LOCATION') == ''):
+                        logger.error(f"Service is not configured with a slack channel, slack output is ignored. If you want slack output, please setup Environment Variable EIAI_KCAF_DEFAULT_SLACK_CHANNEL or service config json file.")
                         context.output = 'local'
                     else:
                         context.slack_message_ts = self.open_slack_thread(context)

@@ -21,9 +21,9 @@ class KcafLog:
 
     @staticmethod
     def get_log_path():
-        if os.environ.get('KCAF_LOG_DIR') is not None and os.environ.get('KCAF_LOG_DIR') != '' and os.path.exists(
-                os.environ.get('KCAF_LOG_DIR')):
-            log_path = os.environ.get('KCAF_LOG_DIR')
+        if os.environ.get('EIAI_KCAF_LOG_DIR') is not None and os.environ.get('EIAI_KCAF_LOG_DIR') != '' and os.path.exists(
+                os.environ.get('EIAI_KCAF_LOG_DIR')):
+            log_path = os.environ.get('EIAI_KCAF_LOG_DIR')
         else:
             log_path = os.path.abspath(os.path.join(os.getcwd())) + "/log/"
         if os.path.exists(log_path) and os.path.isdir(log_path):

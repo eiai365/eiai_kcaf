@@ -25,7 +25,7 @@ def get_client():
     global client
 
     if client is None:
-        client = WebClient(token=os.environ["KCAF_SLACK_TOKEN"], ssl=ssl_context, timeout=300)
+        client = WebClient(token=os.environ["EIAI_KCAF_SLACK_TOKEN"], ssl=ssl_context, timeout=300)
     return client
 
 
@@ -111,6 +111,6 @@ def validate_hmac(timestamp: str, slack_signature: str, payload: str) -> bool:
 
     sig_basestring = str.encode("v0:" + str(timestamp) + ":") + payload
     request_hash = (
-        "v0=" + hmac.new(str.encode(os.environ.get("SLACK_SIGNING_SECRET")), sig_basestring, hashlib.sha256).hexdigest()
+        "v0=" + hmac.new(str.encode(os.environ.get("EIAI_KCAF_SLACK_SIGNING_SECRET")), sig_basestring, hashlib.sha256).hexdigest()
     )
     return hmac.compare_digest(request_hash, slack_signature)
