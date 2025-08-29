@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 setup(
     name="eiai_kcaf",
     description="EIAI Kubernetes Cluster Automation Framework",
-    version="0.0.5",
+    version="0.0.6",
     author="Eiai365 Eiai",
     author_email="eiai365.eiai@gmail.com",
     install_requires=[
