@@ -29,7 +29,7 @@ def build_logging(log_file, log_level):
         file_handler = logging.FileHandler(log_file, 'a')
         file_handler.setFormatter(SensitiveDataFormatter(format_str))
 
-        application_log = logging.getLogger(__name__)
+        application_log = logging.getLogger(f"kcaf.framework.{os.path.splitext(os.path.basename(__file__))[0]}")
         application_log.handlers = []
         application_log.addHandler(stream_handler)
         application_log.addHandler(file_handler)
